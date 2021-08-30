@@ -1,0 +1,37 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 16
+VisualStudioVersion = 16.0.31605.320
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "electronicwatches.Common", "electronicwatches.Common\electronicwatches.Common.csproj", "{9C0D3A60-13D2-45F4-A538-B7F3931332CE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "electronicwatches.Functions", "electronicwatches.Functions\electronicwatches.Functions.csproj", "{B785F1C6-0B89-4BBF-959C-C1A5F8D6F9F3}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "electronicwatches.Test", "electronicwatches.Test\electronicwatches.Test.csproj", "{36E1AEF3-4E71-4FA9-9953-6BC108D64C00}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{9C0D3A60-13D2-45F4-A538-B7F3931332CE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{9C0D3A60-13D2-45F4-A538-B7F3931332CE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{9C0D3A60-13D2-45F4-A538-B7F3931332CE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{9C0D3A60-13D2-45F4-A538-B7F3931332CE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B785F1C6-0B89-4BBF-959C-C1A5F8D6F9F3}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B785F1C6-0B89-4BBF-959C-C1A5F8D6F9F3}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B785F1C6-0B89-4BBF-959C-C1A5F8D6F9F3}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B785F1C6-0B89-4BBF-959C-C1A5F8D6F9F3}.Release|Any CPU.Build.0 = Release|Any CPU
+		{36E1AEF3-4E71-4FA9-9953-6BC108D64C00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{36E1AEF3-4E71-4FA9-9953-6BC108D64C00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{36E1AEF3-4E71-4FA9-9953-6BC108D64C00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{36E1AEF3-4E71-4FA9-9953-6BC108D64C00}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {B4F52061-05AA-44F0-B19B-777A494E0F7E}
+	EndGlobalSection
+EndGlobal
