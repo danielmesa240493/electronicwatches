@@ -8,7 +8,7 @@ namespace electronicwatches.Common.Models
 
         public int EmployeeId { get; set; }
 
-        public int Type { get; set; }
+        public byte Type { get; set; }
 
         public bool Consolidated { get; set; }
     }
