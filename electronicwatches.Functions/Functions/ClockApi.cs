@@ -131,5 +131,34 @@ namespace electronicwatches.Functions.Functions
                 Result = registers
             });
         }
+
+        [FunctionName(nameof(GetRegisterById))]
+        public static IActionResult GetRegisterById(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "register/{id}")] HttpRequest req,
+            [Table("register", "REGISTER", "{id}", Connection = "AzureWebJobsStorage")] ClockEntity clockEntity,
+            string id,
+            ILogger log)
+        {
+            log.LogInformation($"Get register by id: {id}, received.");
+
+            if (clockEntity == null)
+            {
+                return new BadRequestObjectResult(new Response
+                {
+                    IsSuccess = false,
+                    Message = "Register not found"
+                });
+            }
+
+            string message = $"Register: {clockEntity.RowKey}, retrieved.";
+            log.LogInformation(message);
+
+            return new OkObjectResult(new Response
+            {
+                IsSuccess = true,
+                Message = message,
+                Result = clockEntity
+            });
+        }
     }
 }
