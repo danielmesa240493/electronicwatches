@@ -24,8 +24,6 @@ namespace electronicwatches.Functions.Functions
         {
             log.LogInformation("Recieved a new register.");
 
-            string name = req.Query["name"];
-
             string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
             Clock clock = JsonConvert.DeserializeObject<Clock>(requestBody);
 
@@ -54,6 +52,54 @@ namespace electronicwatches.Functions.Functions
             await registerTable.ExecuteAsync(addOperation);
 
             string message = "New register stored in table.";
+            log.LogInformation(message);
+
+            return new OkObjectResult(new Response
+            {
+                IsSuccess = true,
+                Message = message,
+                Result = clockEntity
+            });
+        }
+
+        [FunctionName(nameof(UpdateRegister))]
+        public static async Task<IActionResult> UpdateRegister(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "put", Route = "register/{id}")] HttpRequest req,
+            [Table("register", Connection = "AzureWebJobsStorage")] CloudTable registerTable,
+            string id,
+            ILogger log)
+        {
+            log.LogInformation($"Update for register: {id}, received.");
+
+            string requestBody = await new StreamReader(req.Body).ReadToEndAsync();
+            Clock clock = JsonConvert.DeserializeObject<Clock>(requestBody);
+
+            //Validate register id
+            TableOperation findOperation = TableOperation.Retrieve<ClockEntity>("REGISTER", id);
+            TableResult findResult = await registerTable.ExecuteAsync(findOperation);
+            if (findResult.Result == null)
+            {
+                return new BadRequestObjectResult(new Response
+                {
+                    IsSuccess = false,
+                    Message = "Register not found."
+                });
+            }
+
+            //Update register
+            ClockEntity clockEntity = (ClockEntity)findResult.Result;
+            clockEntity.Consolidated = clock.Consolidated;
+            if (!string.IsNullOrEmpty(clock.EmployeeId.ToString()) || !string.IsNullOrEmpty(clock.Hour.ToString()) || !string.IsNullOrEmpty(clock.Type.ToString()))
+            {
+                clockEntity.EmployeeId = clock.EmployeeId;
+                clockEntity.Hour = clock.Hour;
+                clockEntity.Type = clock.Type;
+            }
+
+            TableOperation addOperation = TableOperation.Replace(clockEntity);
+            await registerTable.ExecuteAsync(addOperation);
+
+            string message = $"Register: {id}, updated in table.";
             log.LogInformation(message);
 
             return new OkObjectResult(new Response
