@@ -160,5 +160,36 @@ namespace electronicwatches.Functions.Functions
                 Result = clockEntity
             });
         }
+
+        [FunctionName(nameof(DeleteRegister))]
+        public static async Task<IActionResult> DeleteRegister(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "delete", Route = "register/{id}")] HttpRequest req,
+            [Table("register", "REGISTER", "{id}", Connection = "AzureWebJobsStorage")] ClockEntity clockEntity,
+            [Table("register", Connection = "AzureWebJobsStorage")] CloudTable registerTable,
+            string id,
+            ILogger log)
+        {
+            log.LogInformation($"Delete register: {id}, received.");
+
+            if (clockEntity == null)
+            {
+                return new BadRequestObjectResult(new Response
+                {
+                    IsSuccess = false,
+                    Message = "Register not found"
+                });
+            }
+
+            await registerTable.ExecuteAsync(TableOperation.Delete(clockEntity));
+            string message = $"Register: {clockEntity.RowKey}, deleted.";
+            log.LogInformation(message);
+
+            return new OkObjectResult(new Response
+            {
+                IsSuccess = true,
+                Message = message,
+                Result = clockEntity
+            });
+        }
     }
 }
