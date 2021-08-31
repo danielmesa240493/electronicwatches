@@ -109,5 +109,27 @@ namespace electronicwatches.Functions.Functions
                 Result = clockEntity
             });
         }
+
+        [FunctionName(nameof(GetAllRegisters))]
+        public static async Task<IActionResult> GetAllRegisters(
+            [HttpTrigger(AuthorizationLevel.Anonymous, "get", Route = "register")] HttpRequest req,
+            [Table("register", Connection = "AzureWebJobsStorage")] CloudTable registerTable,
+            ILogger log)
+        {
+            log.LogInformation("Get all registers received.");
+
+            TableQuery<ClockEntity> query = new TableQuery<ClockEntity>();
+            TableQuerySegment<ClockEntity> registers = await registerTable.ExecuteQuerySegmentedAsync(query, null);
+
+            string message = "Retrieved all registers.";
+            log.LogInformation(message);
+
+            return new OkObjectResult(new Response
+            {
+                IsSuccess = true,
+                Message = message,
+                Result = registers
+            });
+        }
     }
 }
