@@ -68,7 +68,7 @@ namespace electronicwatches.Test.Helpers
                 Hour = DateTime.UtcNow,
                 Consolidated = false,
                 EmployeeId = 1,
-                Type = 0
+                Type = 0,                
             };
         }
 

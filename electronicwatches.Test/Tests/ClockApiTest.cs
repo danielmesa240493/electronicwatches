@@ -6,13 +6,12 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Internal;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
-using Microsoft.WindowsAzure.Storage.Table;
 using System;
 using Xunit;
 
 namespace electronicwatches.Test.Tests
 {
-    public class ClockApiTest : TableEntity
+    public class ClockApiTest
     {
         private readonly ILogger logger = TestFactory.CreateLogger();
 
